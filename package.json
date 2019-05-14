@@ -1,0 +1,31 @@
+{
+  "name": "@hugsmidjan/gulp-rollup",
+  "version": "0.1.0",
+  "description": "script bundling gulp task using rollup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:hugsmidjan/gulp-rollup.git"
+  },
+  "author": "Hugsmiðjan ehf. (www.hugsmidjan.is)",
+  "contributors": [
+    "Már Örlygsson <mar@hugsmidjan.is>"
+  ],
+  "license": "ISC",
+  "peerDependencies": {
+    "gulp": "^4"
+  },
+  "dependencies": {
+    "glob": "^7.1.4",
+    "rollup": "^1.11.3",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^4.2.4",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-uglify": "^6.0.2"
+  }
+}
