@@ -10,7 +10,7 @@ npm install --save-dev @hugsmidjan/gulp-rollup
 const rollupTaskFactory = require('@hugsmidjan/gulp-rollup');
 
 const options = {
-  // Defaults
+  // These are the defaults:
   name: 'scripts', // the display name of the generated tasks
   src: 'src/',
   dist: 'pub/',
@@ -37,12 +37,11 @@ const customConfigger = (rollupConfig) => {
   };
 };
 
-const { script, script_watch } = rollupTaskFactory(options, customConfigger);
+// Create the gulp tasks based on the above options.
+const scriptTasks = rollupTaskFactory(options, customConfigger);
 
-// Note that `options.name` controls the names of the exported
-// task functions.
-const { vendorScripts, vendorScripts_watch } = rollupTaskFactory({
-  name: 'vendorScripts',
-  src: 'libs/',
-});
+// scriptTasks is a two item array...
+const [scripts, scriptsWatch] = scriptTasks;
+// ...but it also exposes the tasks as named properties.
+const { bundle, watch } = scriptTasks;
 ```

@@ -65,7 +65,7 @@ const getConfig = (opts) => {
         //   promises: true,
         // }),
         _plugins.buble({ objectAssign: true }),
-        // hasTypescript && _plugins.typescript(),
+        hasTypescript && _plugins.typescript(),
         _plugins.replace({
           'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
           ...opts.replaceOpts,
@@ -120,6 +120,7 @@ const taskFactory = (opts = {}, configger = (x) => x) => {
     });
     return Promise.all(rollups);
   };
+  bundleTask.displayName = opts.name;
 
   const watchTask = () => {
     const rollupConfig = getConfig(opts).map(configger);
