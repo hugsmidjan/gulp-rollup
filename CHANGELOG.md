@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.2.2
+
+_2019-05-15_
+
 - feat: Add automatic TypeScript compiling
 - docs: Add example of default/simple usage + mention exposed plugins/helper
 
