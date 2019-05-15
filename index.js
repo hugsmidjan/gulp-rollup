@@ -1,8 +1,8 @@
 const rollup = require('rollup');
-// let hasTypescript = false;
-// try {
-//   hasTypescript = !!require.resolve('typescript');
-// } catch (error) {}
+let hasTypescript = false;
+try {
+  hasTypescript = !!require.resolve('typescript');
+} catch (error) {}
 
 const _plugins = {
   buble: require('rollup-plugin-buble'),
@@ -11,7 +11,7 @@ const _plugins = {
   // nodent: require('rollup-plugin-nodent'), // simple+fast async/await
   nodeResolve: require('rollup-plugin-node-resolve'),
   replace: require('rollup-plugin-replace'),
-  // typescript: hasTypescript && require('rollup-plugin-typescript2'),
+  typescript: hasTypescript && require('rollup-plugin-typescript2'),
   uglify: require('rollup-plugin-uglify').uglify,
 };
 const glob = require('glob');
@@ -41,9 +41,10 @@ const defaultOpts = {
   // plugins: [], // custom list of plugins
   // replaceOpts: {}, // custom options for rollup-plugin-replace
   // uglifyOpts: {}, // custom options for rollup-plugin-uglify
+  // typescriptOpts: {}, // custom options for rollup-plugin-typescript2
   minify: true,
   sourcemaps: true,
-  format: 'iife',
+  format: 'iife', // Rollup output format
   codeSplit: true, // (when format isn't 'iife')
   // inputOpts: {},
   // outputOpts: {},
@@ -57,6 +58,11 @@ const getConfig = (opts) => {
     return {
       input: isFileNameInput ? opts.src + input : input,
       plugins: opts.plugins || [
+        hasTypescript &&
+          _plugins.typescript({
+            tsconfigDefaults: { compilerOptions: { resolveJsonModule: true } },
+            ...opts.typescriptOpts,
+          }),
         _plugins.json(),
         _plugins.nodeResolve(),
         _plugins.commonjs(),
@@ -65,7 +71,6 @@ const getConfig = (opts) => {
         //   promises: true,
         // }),
         _plugins.buble({ objectAssign: true }),
-        // hasTypescript && _plugins.typescript(),
         _plugins.replace({
           'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
           ...opts.replaceOpts,

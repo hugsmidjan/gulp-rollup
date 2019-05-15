@@ -26,6 +26,7 @@ const options = {
   // plugins: [], // custom list of plugins
   // replaceOpts: {}, // custom options for rollup-plugin-replace
   // uglifyOpts: {}, // custom options for rollup-plugin-uglify
+  // typescriptOpts: {}, // custom options for rollup-plugin-typescript2
   minify: true,
   sourcemaps: true,
   format: 'iife', // Rollup output format
@@ -60,3 +61,10 @@ console.log(rollupTaskFactory.plugins);
 
 console.log(rollupTaskFactory.glob);
 ```
+
+## TypeScript support.
+
+This task automatically bundles TypeScript files, but it's BYOTS (Bring Your Own TypeScript).
+
+It reads `./tsconfig.json`, but sets the `resolveJsonModule` option to `true` by default.
+
