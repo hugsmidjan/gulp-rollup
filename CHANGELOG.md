@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- feat: Support negative (ignore) glob patterns
 
 ## 0.2.2
 

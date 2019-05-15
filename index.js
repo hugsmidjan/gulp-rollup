@@ -18,12 +18,21 @@ const glob = require('glob');
 const { watch } = require('gulp');
 
 const getFileList = (globList, cwd) => {
-  if (typeof globList === 'string') {
-    globList = [globList];
-  }
+  let ignore = [];
+  globList = typeof globList === 'string' ? [globList] : globList;
+  globList = globList.filter((globString) => {
+    if (globString[0] === '!') {
+      ignore.push(globString.substr(1));
+      return false;
+    }
+    return true;
+  });
   const foundFiles = {};
   return globList
-    .reduce((fileList, globString) => fileList.concat(glob.sync(globString, { cwd })), [])
+    .reduce(
+      (fileList, globString) => fileList.concat(glob.sync(globString, { cwd, ignore })),
+      []
+    )
     .filter((fileName) => {
       const found = foundFiles[fileName];
       foundFiles[fileName] = true;
