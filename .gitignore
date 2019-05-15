@@ -1,7 +1,12 @@
 node_modules
-gulpfile.js
-test
 package-lock.json
 yarn.lock
 yarn-error.log
 npm-debug.log
+
+# Ad-hoc local testing files
+.rpt2_cache
+gulpfile.js
+test
+tsconfig.json
+index.html
