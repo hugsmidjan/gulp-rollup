@@ -65,7 +65,7 @@ const getConfig = (opts) => {
         //   promises: true,
         // }),
         _plugins.buble({ objectAssign: true }),
-        hasTypescript && _plugins.typescript(),
+        // hasTypescript && _plugins.typescript(),
         _plugins.replace({
           'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
           ...opts.replaceOpts,
@@ -156,14 +156,13 @@ const taskFactory = (opts = {}, configger = (x) => x) => {
       });
     }
   };
-
-  bundleTask.displayName = opts.name;
   watchTask.displayName = opts.name + '_watch';
 
-  return {
-    [bundleTask.displayName]: bundleTask,
-    [watchTask.displayName]: watchTask,
-  };
+  const ret = [bundleTask, watchTask];
+  ret.bundle = bundleTask;
+  ret.watch = watchTask;
+
+  return ret;
 };
 
 taskFactory.plugins = _plugins;
