@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.2.0
+
+_2019-05-15_
+
 - **BREAKING** feat: Return tasks in an array, with (fixed) named props on top
 
 ## 0.1.0
