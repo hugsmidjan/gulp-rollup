@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- docs: Add example of default/simple usage + mention exposed plugins/helper
 
 ## 0.2.0 / 0.2.1
 
