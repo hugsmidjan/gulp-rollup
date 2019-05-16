@@ -19,6 +19,7 @@
     "gulp": "^4"
   },
   "dependencies": {
+    "@hugsmidjan/gulp-utils": "^0.1",
     "glob": "^7.1.4",
     "rollup": "^1.11.3",
     "rollup-plugin-buble": "^0.19.6",

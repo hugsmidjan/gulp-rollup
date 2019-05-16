@@ -4,6 +4,7 @@
 
 - ... <!-- Add new lines here. Version number will be decided later -->
 - feat: Support negative (ignore) glob patterns
+- refactor: Stop exposing the `glob` module
 
 ## 0.2.2
 

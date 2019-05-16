@@ -1,4 +1,6 @@
+const { normalizeOpts } = require('@hugsmidjan/gulp-utils');
 const rollup = require('rollup');
+
 let hasTypescript = false;
 try {
   hasTypescript = !!require.resolve('typescript');
@@ -123,9 +125,9 @@ const getConfig = (opts) => {
 };
 
 const taskFactory = (opts = {}, configger = (x) => x) => {
-  opts = { ...defaultOpts, ...opts };
-  opts.src += '/';
-  opts.dist += '/';
+  opts = normalizeOpts(opts, defaultOpts);
+  opts.src = (opts.src+'/').replace(/\/\/$/, '/');
+  opts.dist = (opts.dist+'/').replace(/\/\/$/, '/');
 
   const bundleTask = () => {
     const rollupConfig = getConfig(opts).map(configger);
@@ -180,6 +182,5 @@ const taskFactory = (opts = {}, configger = (x) => x) => {
 };
 
 taskFactory.plugins = _plugins;
-taskFactory.glob = glob;
 
 module.exports = taskFactory;

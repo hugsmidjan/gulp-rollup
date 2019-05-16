@@ -58,8 +58,6 @@ it uses, as well as its file-globbing module.
 
 ```js
 console.log(rollupTaskFactory.plugins);
-
-console.log(rollupTaskFactory.glob);
 ```
 
 ## TypeScript support.
