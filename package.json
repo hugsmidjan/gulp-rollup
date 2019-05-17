@@ -2,7 +2,7 @@
   "name": "@hugsmidjan/gulp-rollup",
   "version": "0.2.2",
   "description": "script bundling gulp task using rollup",
-  "main": "index.js",
+  "main": "gulp-rollup.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
