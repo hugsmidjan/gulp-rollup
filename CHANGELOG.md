@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- feat: Add `jsx` and `tsx` files to the default `glob`
 
 ## 0.3.0
 

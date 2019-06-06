@@ -20,7 +20,7 @@ const options = {
   name: 'scripts', // the display name of the generated tasks
   src: 'src/',
   dist: 'pub/',
-  glob: '*.{js,ts}', // Glob|Array<Glob> for entry points. Use '!' prefix to ignore
+  glob: '*.{js,jsx,ts,tsx}', // Glob|Array<Glob> for entry points. Use '!' prefix to ignore
   // entryPoints: null, // Advanced: rollup.input map - overrides the `glob` option
   NODE_ENV: 'production',
   // plugins: [], // custom list of plugins

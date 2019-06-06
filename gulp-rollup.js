@@ -46,7 +46,7 @@ const defaultOpts = {
   name: 'scripts', // the display name of the generated tasks
   src: 'src/',
   dist: 'pub/',
-  glob: '*.{js,ts}', // which files to glob up as entry points
+  glob: '*.{js,jsx,ts,tsx}', // which files to glob up as entry points
   // entryPoints: null, // Advanced: rollup.input string array or input map
   NODE_ENV: 'production',
   // plugins: [], // custom list of plugins
