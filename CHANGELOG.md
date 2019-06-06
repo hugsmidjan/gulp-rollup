@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.3.1
+
+_2019-06-06_
+
 - feat: Add `jsx` and `tsx` files to the default `glob`
 
 ## 0.3.0
