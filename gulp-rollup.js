@@ -163,6 +163,7 @@ const taskFactory = (opts = {}, configger = (x) => x) => {
     }
 
     if (!opts.entryPoints) {
+      // TODO: Consider using gulp-utils's `prefixGlobs()` function here
       const gulpWatcher = watch(opts.glob, { cwd: opts.src });
       gulpWatcher.on('add', (path) => {
         console.info(logPrefix, path, 'added');
