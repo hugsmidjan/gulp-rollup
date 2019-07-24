@@ -72,7 +72,6 @@ const getConfig = (opts) => {
         opts.plugins || [
           hasTypescript &&
             _plugins.typescript({
-              tsconfigDefaults: { compilerOptions: { resolveJsonModule: true } },
               ...opts.typescriptOpts,
             }),
           _plugins.json(),
@@ -82,7 +81,10 @@ const getConfig = (opts) => {
           //   noRuntime: true,
           //   promises: true,
           // }),
-          _plugins.buble({ objectAssign: true }),
+          _plugins.buble({
+            objectAssign: true,
+            exclude: '**/*.{ts,tsx}',
+          }),
           _plugins.replace({
             'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
             ...opts.replaceOpts,

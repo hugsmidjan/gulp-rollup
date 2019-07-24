@@ -4,6 +4,7 @@
 
 - ... <!-- Add new lines here. Version number will be decided later -->
 - fix: Tolerate sparce `opts.plugins` arrays
+- fix: Remove all TS config defaults and skip Bublé on .ts(x) files
 
 ## 0.3.1
 
