@@ -68,34 +68,36 @@ const getConfig = (opts) => {
     const outputDist = isFileNameInput ? { file: opts.dist + input } : { dir: opts.dist };
     return {
       input: isFileNameInput ? opts.src + input : input,
-      plugins: opts.plugins || [
-        hasTypescript &&
-          _plugins.typescript({
-            tsconfigDefaults: { compilerOptions: { resolveJsonModule: true } },
-            ...opts.typescriptOpts,
-          }),
-        _plugins.json(),
-        _plugins.nodeResolve(),
-        _plugins.commonjs(),
-        // _plugins.nodent({
-        //   noRuntime: true,
-        //   promises: true,
-        // }),
-        _plugins.buble({ objectAssign: true }),
-        _plugins.replace({
-          'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
-          ...opts.replaceOpts,
-        }),
-        !opts.minify
-          ? null
-          : _plugins.uglify({
-              output: { comments: 'some' },
-              compress: {
-                // drop_console: true, // Meh, ESLint warnings should be sufficient
-              },
-              ...opts.uglifyOpts,
+      plugins: (
+        opts.plugins || [
+          hasTypescript &&
+            _plugins.typescript({
+              tsconfigDefaults: { compilerOptions: { resolveJsonModule: true } },
+              ...opts.typescriptOpts,
             }),
-      ],
+          _plugins.json(),
+          _plugins.nodeResolve(),
+          _plugins.commonjs(),
+          // _plugins.nodent({
+          //   noRuntime: true,
+          //   promises: true,
+          // }),
+          _plugins.buble({ objectAssign: true }),
+          _plugins.replace({
+            'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
+            ...opts.replaceOpts,
+          }),
+          !opts.minify
+            ? null
+            : _plugins.uglify({
+                output: { comments: 'some' },
+                compress: {
+                  // drop_console: true, // Meh, ESLint warnings should be sufficient
+                },
+                ...opts.uglifyOpts,
+              }),
+        ]
+      ).filter((plugin) => !!plugin),
       ...opts.inputOptions,
       output: {
         ...outputDist,
@@ -126,8 +128,8 @@ const getConfig = (opts) => {
 
 const taskFactory = (opts = {}, configger = (x) => x) => {
   opts = normalizeOpts(opts, defaultOpts);
-  opts.src = (opts.src+'/').replace(/\/\/$/, '/');
-  opts.dist = (opts.dist+'/').replace(/\/\/$/, '/');
+  opts.src = (opts.src + '/').replace(/\/\/$/, '/');
+  opts.dist = (opts.dist + '/').replace(/\/\/$/, '/');
 
   const bundleTask = () => {
     const rollupConfig = getConfig(opts).map(configger);

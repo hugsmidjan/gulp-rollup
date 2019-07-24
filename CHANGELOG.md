@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Tolerate sparce `opts.plugins` arrays
 
 ## 0.3.1
 
