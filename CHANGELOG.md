@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.3.2
+
+_2019-07-24_
+
 - fix: Tolerate sparce `opts.plugins` arrays
 - fix: Remove all TS config defaults and skip Bublé on .ts(x) files
 - chore: Update dpendencies
