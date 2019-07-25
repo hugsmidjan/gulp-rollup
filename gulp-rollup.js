@@ -75,6 +75,9 @@ const getConfig = (opts) => {
               ...opts.typescriptOpts,
             }),
           _plugins.json(),
+          // TODO: Check and see if this should be placed first
+          // in the plugin list.
+          // (https://github.com/ezolenko/rollup-plugin-typescript2/issues/66#issuecomment-378735446)
           _plugins.nodeResolve(),
           _plugins.commonjs(),
           // _plugins.nodent({
