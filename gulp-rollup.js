@@ -20,7 +20,7 @@ const glob = require('glob');
 const { watch } = require('gulp');
 
 const getFileList = (globList, cwd) => {
-  let ignore = [];
+  const ignore = [];
   globList = typeof globList === 'string' ? [globList] : globList;
   globList = globList.filter((globString) => {
     if (globString[0] === '!') {
@@ -123,7 +123,7 @@ const getConfig = (opts) => {
   } else if (opts.format === 'iife' || opts.codeSplit === false) {
     return getFileList(opts.glob, opts.src).map(makeConfig);
   } else {
-    let entryPointMap = getFileList(opts.glob, opts.src).reduce((acc, fileName) => {
+    const entryPointMap = getFileList(opts.glob, opts.src).reduce((acc, fileName) => {
       acc[fileName.replace(/\..+?$/, '')] = opts.src + fileName;
       return acc;
     }, {});
