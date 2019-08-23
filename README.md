@@ -64,5 +64,5 @@ console.log(rollupTaskFactory.plugins);
 
 This task automatically bundles TypeScript files, but it's BYOTS (Bring Your Own TypeScript).
 
-It reads `./tsconfig.json`, but sets the `resolveJsonModule` option to `true` by default.
+It reads `./tsconfig.json`, but [some compiler options are forced](https://www.npmjs.com/package/rollup-plugin-typescript2#some-compiler-options-are-forced).
 
