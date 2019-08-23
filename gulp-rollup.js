@@ -70,24 +70,24 @@ const getConfig = (opts) => {
       input: isFileNameInput ? opts.src + input : input,
       plugins: (
         opts.plugins || [
+          _plugins.json(),
           hasTypescript &&
             _plugins.typescript({
               ...opts.typescriptOpts,
             }),
-          _plugins.json(),
           // TODO: Check and see if this should be placed first
           // in the plugin list.
           // (https://github.com/ezolenko/rollup-plugin-typescript2/issues/66#issuecomment-378735446)
-          _plugins.nodeResolve(),
-          _plugins.commonjs(),
-          // _plugins.nodent({
-          //   noRuntime: true,
-          //   promises: true,
-          // }),
           _plugins.buble({
             objectAssign: true,
             exclude: '**/*.{ts,tsx}',
           }),
+          // _plugins.nodent({
+          //   noRuntime: true,
+          //   promises: true,
+          // }),
+          _plugins.nodeResolve(),
+          _plugins.commonjs(),
           _plugins.replace({
             'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
             ...opts.replaceOpts,

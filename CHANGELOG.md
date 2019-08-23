@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Move bublé plugin to earlier in the plugin list
 
 ## 0.3.2 / 0.3.3
 
