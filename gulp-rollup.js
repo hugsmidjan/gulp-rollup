@@ -1,3 +1,4 @@
+/* global process */
 const { normalizeOpts } = require('@hugsmidjan/gulp-utils');
 const rollup = require('rollup');
 
@@ -48,7 +49,7 @@ const defaultOpts = {
   dist: 'pub/',
   glob: '*.{js,jsx,ts,tsx}', // which files to glob up as entry points
   // entryPoints: null, // Advanced: rollup.input string array or input map
-  NODE_ENV: 'production',
+  NODE_ENV: process.env.NODE_ENV,
   // plugins: [], // custom list of plugins
   // replaceOpts: {}, // custom options for rollup-plugin-replace
   // uglifyOpts: {}, // custom options for rollup-plugin-uglify
