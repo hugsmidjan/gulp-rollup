@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Bundle file-names got truncated on first period
 
 ## 0.3.4
 

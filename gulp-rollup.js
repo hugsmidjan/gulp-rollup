@@ -125,7 +125,7 @@ const getConfig = (opts) => {
     return getFileList(opts.glob, opts.src).map(makeConfig);
   } else {
     const entryPointMap = getFileList(opts.glob, opts.src).reduce((acc, fileName) => {
-      acc[fileName.replace(/\..+?$/, '')] = opts.src + fileName;
+      acc[fileName.replace(/\.[^.]+$/, '')] = opts.src + fileName;
       return acc;
     }, {});
     return [makeConfig(entryPointMap)];
