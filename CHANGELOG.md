@@ -3,9 +3,16 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.3.5
+
+_2019-09-09_
+
 - fix: Bundle file-names got truncated on first period
 
 ## 0.3.4
+
+_2019-08-27_
 
 - fix: Use the raw `process.env.NODE_ENV` as default
 - fix: Move bublé plugin to earlier in the plugin list
