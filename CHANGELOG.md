@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Ensure non-code-splitting bundle files have a `.js` extension
 
 ## 0.3.5
 

@@ -66,7 +66,11 @@ const defaultOpts = {
 const getConfig = (opts) => {
   const makeConfig = (input) => {
     const isFileNameInput = typeof input === 'string';
-    const outputDist = isFileNameInput ? { file: opts.dist + input } : { dir: opts.dist };
+    const outputDist = isFileNameInput
+      // Auto-map `*.ts`, `*.tsx` and `*.jsx` to `*.js`.
+      // Leave *.esm as is.
+			? { file: opts.dist + input.replace(/\.(?:tsx?|jsx)$/, '.js') }
+			: { dir: opts.dist };
     return {
       input: isFileNameInput ? opts.src + input : input,
       plugins: (
