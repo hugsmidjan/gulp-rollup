@@ -86,9 +86,6 @@ const getConfig = (opts) => {
                 jsx: tsCompilerOpts.jsx || 'react',
               },
             }),
-          // TODO: Check and see if this should be placed first
-          // in the plugin list.
-          // (https://github.com/ezolenko/rollup-plugin-typescript2/issues/66#issuecomment-378735446)
           _plugins.buble({
             objectAssign: true,
             exclude: '**/*.{ts,tsx}',
