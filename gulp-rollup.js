@@ -63,6 +63,21 @@ const defaultOpts = {
   // watchOptions: {},
 };
 
+const makeTSOpts = (opts) => {
+  const tsconfigOverride = opts && opts.tsconfigOverride;
+  const compilerOptions = (tsconfigOverride && tsconfigOverride.compilerOptions) || {};
+  return {
+    ...opts,
+    tsconfigOverride: {
+      ...tsconfigOverride,
+      compilerOptions: {
+        ...compilerOptions,
+        jsx: compilerOptions.jsx || 'react',
+      },
+    },
+  };
+};
+
 const getConfig = (opts) => {
   const makeConfig = (input) => {
     const isFileNameInput = typeof input === 'string';
@@ -71,21 +86,12 @@ const getConfig = (opts) => {
         // Leave *.esm as is.
         { file: opts.dist + input.replace(/\.(?:tsx?|jsx)$/, '.js') }
       : { dir: opts.dist };
-    const tsOpts = opts.typescriptOpts;
-    const tsCompilerOpts = (tsOpts && tsOpts.compilerOptions) || {};
     return {
       input: isFileNameInput ? opts.src + input : input,
       plugins: (
         opts.plugins || [
           _plugins.json(),
-          hasTypescript &&
-            _plugins.typescript({
-              ...tsOpts,
-              compilerOptions: {
-                ...tsCompilerOpts,
-                jsx: tsCompilerOpts.jsx || 'react',
-              },
-            }),
+          hasTypescript && _plugins.typescript(makeTSOpts(opts.typescriptOpts)),
           _plugins.buble({
             objectAssign: true,
             exclude: '**/*.{ts,tsx}',
