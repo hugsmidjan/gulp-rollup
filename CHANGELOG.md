@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Default `typescriptOpts.compilerOptions.jsx` to `'react'` – to Match Bublé's default handling of JavaScript files.
 
 ## 0.3.6
 

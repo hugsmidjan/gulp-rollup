@@ -66,3 +66,7 @@ This task automatically bundles TypeScript files, but it's BYOTS (Bring Your Own
 
 It reads `./tsconfig.json`, but [some compiler options are forced](https://www.npmjs.com/package/rollup-plugin-typescript2#some-compiler-options-are-forced).
 
+Additionally, `compilerOptions.jsx` is hard-defaulted to `'react'`, but it can be overridden via the `typescriptOpts` option.
+
+
+

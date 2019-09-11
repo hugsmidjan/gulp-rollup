@@ -67,10 +67,12 @@ const getConfig = (opts) => {
   const makeConfig = (input) => {
     const isFileNameInput = typeof input === 'string';
     const outputDist = isFileNameInput
-      // Auto-map `*.ts`, `*.tsx` and `*.jsx` to `*.js`.
-      // Leave *.esm as is.
-			? { file: opts.dist + input.replace(/\.(?:tsx?|jsx)$/, '.js') }
-			: { dir: opts.dist };
+      ? // Auto-map `*.ts`, `*.tsx` and `*.jsx` to `*.js`.
+        // Leave *.esm as is.
+        { file: opts.dist + input.replace(/\.(?:tsx?|jsx)$/, '.js') }
+      : { dir: opts.dist };
+    const tsOpts = opts.typescriptOpts;
+    const tsCompilerOpts = (tsOpts && tsOpts.compilerOptions) || {};
     return {
       input: isFileNameInput ? opts.src + input : input,
       plugins: (
@@ -78,7 +80,11 @@ const getConfig = (opts) => {
           _plugins.json(),
           hasTypescript &&
             _plugins.typescript({
-              ...opts.typescriptOpts,
+              ...tsOpts,
+              compilerOptions: {
+                ...tsCompilerOpts,
+                jsx: tsCompilerOpts.jsx || 'react',
+              },
             }),
           // TODO: Check and see if this should be placed first
           // in the plugin list.
