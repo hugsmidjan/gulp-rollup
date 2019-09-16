@@ -2,10 +2,7 @@
 const { normalizeOpts } = require('@hugsmidjan/gulp-utils');
 const rollup = require('rollup');
 
-let hasTypescript = false;
-try {
-  hasTypescript = !!require.resolve('typescript');
-} catch (error) {}
+const hasTypescript = false;
 
 const _plugins = {
   buble: require('rollup-plugin-buble'),
@@ -14,7 +11,7 @@ const _plugins = {
   // nodent: require('rollup-plugin-nodent'), // simple+fast async/await
   nodeResolve: require('rollup-plugin-node-resolve'),
   replace: require('rollup-plugin-replace'),
-  typescript: hasTypescript && require('rollup-plugin-typescript2'),
+  typescript: require('rollup-plugin-typescript2'),
   uglify: require('rollup-plugin-uglify').uglify,
 };
 const glob = require('glob');
@@ -78,7 +75,23 @@ const makeTSOpts = (opts) => {
   };
 };
 
+const handleTS = (opts) => {
+  if (opts.typescriptOpts) {
+    return true;
+  }
+  const fs = require('fs');
+  let path = process.cwd();
+  while (path) {
+    if (fs.existsSync(path + '/tsconfig.json')) {
+      return true;
+    }
+    path = path.replace(/\/[^/]+?$/, '');
+  }
+  return false;
+};
+
 const getConfig = (opts) => {
+  console.log(handleTS(opts));
   const makeConfig = (input) => {
     const isFileNameInput = typeof input === 'string';
     const outputDist = isFileNameInput
@@ -91,7 +104,7 @@ const getConfig = (opts) => {
       plugins: (
         opts.plugins || [
           _plugins.json(),
-          hasTypescript && _plugins.typescript(makeTSOpts(opts.typescriptOpts)),
+          handleTS(opts) && _plugins.typescript(makeTSOpts(opts.typescriptOpts)),
           _plugins.buble({
             objectAssign: true,
             exclude: '**/*.{ts,tsx}',

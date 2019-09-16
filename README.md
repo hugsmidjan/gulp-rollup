@@ -64,7 +64,9 @@ console.log(rollupTaskFactory.plugins);
 
 This task automatically bundles TypeScript files, but it's BYOTS (Bring Your Own TypeScript).
 
-It reads `./tsconfig.json`, but [some compiler options are forced](https://www.npmjs.com/package/rollup-plugin-typescript2#some-compiler-options-are-forced).
+The Typescript plugin is invoked if `typescriptOpts` are present (even if they're empty), or a `tsconfig.json` file is detected in/or above the current folder.
+
+It respects `./tsconfig.json`, but [some compiler options are forced](https://www.npmjs.com/package/rollup-plugin-typescript2#some-compiler-options-are-forced).
 
 Additionally, `compilerOptions.jsx` is hard-defaulted to `'react'`, but it can be overridden via `typescriptOpts.tsconfigOverride.compilerOptions.jsx`.
 

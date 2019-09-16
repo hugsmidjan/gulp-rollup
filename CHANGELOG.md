@@ -3,12 +3,16 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Change TS auto-detection to search for `tsconfig.json` – or the
+  presence of `typescriptOpts`. This is a truer indicator of the intent to use
+  TypeScript than `typescript`/`tsc` being installed.
 
 ## 0.3.7 / 0.3.8
 
 _2019-09-11_
 
-- fix: Default `typescriptOpts.compilerOptions.jsx` to `'react'` – to Match Bublé's default handling of JavaScript files.
+- fix: Default `typescriptOpts.compilerOptions.jsx` to `'react'` – to Match
+  Bublé's default handling of JavaScript files.
 
 ## 0.3.6
 
