@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.3.9
+
+_2019-09-16_
+
 - fix: Change TS auto-detection to search for `tsconfig.json` – or the
   presence of `typescriptOpts`. This is a truer indicator of the intent to use
   TypeScript than `typescript`/`tsc` being installed.
