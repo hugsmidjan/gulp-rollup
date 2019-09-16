@@ -91,7 +91,6 @@ const handleTS = (opts) => {
 };
 
 const getConfig = (opts) => {
-  console.log(handleTS(opts));
   const makeConfig = (input) => {
     const isFileNameInput = typeof input === 'string';
     const outputDist = isFileNameInput
