@@ -6,6 +6,8 @@
 
 ## 0.3.11 / 0.3.12
 
+_2019-10-04_
+
 - fix: Correctly apply `inputOpts` and `outputOpts` + rename `watchOpts`
 - fix: Stop searching for `tsconfig.json` at package root
 
