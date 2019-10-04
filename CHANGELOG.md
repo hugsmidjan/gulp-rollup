@@ -3,10 +3,10 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.3.11 / 0.3.12
+
 - fix: Correctly apply `inputOpts` and `outputOpts` + rename `watchOpts`
-
-## 0.3.11
-
 - fix: Stop searching for `tsconfig.json` at package root
 
 ## 0.3.9 / 0.3.10
