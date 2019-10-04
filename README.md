@@ -22,7 +22,7 @@ const options = {
   dist: 'pub/',
   glob: '*.{js,jsx,ts,tsx}', // Glob|Array<Glob> for entry points. Use '!' prefix to ignore
   // entryPoints: null, // Advanced: rollup.input map - overrides the `glob` option
-  NODE_ENV: 'production',
+  NODE_ENV: process.env.NODE_ENV,
   // plugins: [], // custom list of plugins
   // replaceOpts: {}, // custom options for rollup-plugin-replace
   // uglifyOpts: {}, // custom options for rollup-plugin-uglify
