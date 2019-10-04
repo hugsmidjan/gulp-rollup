@@ -131,17 +131,17 @@ const getConfig = (opts) => {
               }),
         ]
       ).filter((plugin) => !!plugin),
-      ...opts.inputOptions,
+      ...opts.inputOpts,
       output: {
         ...outputDist,
         format: opts.format,
         sourcemap: opts.sourcemaps,
         // sourcemapExcludeSources: true,
-        ...opts.outputOptions,
+        ...opts.outputOpts,
       },
       watch: {
         exclude: 'node_modules/**',
-        ...opts.watchOptions,
+        ...opts.watchOpts,
       },
     };
   };

@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Correctly apply `inputOpts` and `outputOpts` + rename `watchOpts`
 
 ## 0.3.11
 

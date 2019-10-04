@@ -33,7 +33,7 @@ const options = {
   codeSplit: true, // (kicks in when format isn't 'iife')
   // inputOpts: {},
   // outputOpts: {},
-  // watchOptions: {},
+  // watchOpts: {},
 };
 
 // If the `options` object isn't flexible enough...
