@@ -84,6 +84,8 @@ const handleTS = (opts) => {
   while (path) {
     if (fs.existsSync(path + '/tsconfig.json')) {
       return true;
+    } else if (fs.existsSync(path + '/package.json')) {
+			return false;
     }
     path = path.replace(/\/[^/]+?$/, '');
   }

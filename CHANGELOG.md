@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Stop searching for `tsconfig.json` at package root
 
 ## 0.3.9 / 0.3.10
 
