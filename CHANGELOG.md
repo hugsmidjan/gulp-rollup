@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.3.13
+
+_2019-10-14_
+
 - feat: Update `rollup-plugin-typescript2` dependency
 
 ## 0.3.11 / 0.3.12
