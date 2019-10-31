@@ -5,12 +5,12 @@ const rollup = require('rollup');
 const hasTypescript = false;
 
 const _plugins = {
-  buble: require('rollup-plugin-buble'),
+  buble: require('@rollup/plugin-buble'),
   commonjs: require('rollup-plugin-commonjs'),
   json: require('rollup-plugin-json'),
   // nodent: require('rollup-plugin-nodent'), // simple+fast async/await
   nodeResolve: require('rollup-plugin-node-resolve'),
-  replace: require('rollup-plugin-replace'),
+  replace: require('@rollup/plugin-replace'),
   typescript: require('rollup-plugin-typescript2'),
   uglify: require('rollup-plugin-uglify').uglify,
 };
