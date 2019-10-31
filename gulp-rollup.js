@@ -106,10 +106,7 @@ const getConfig = (opts) => {
         opts.plugins || [
           _plugins.json(),
           handleTS(opts) && _plugins.typescript(makeTSOpts(opts.typescriptOpts)),
-          _plugins.buble({
-            objectAssign: true,
-            exclude: '**/*.{ts,tsx}',
-          }),
+          _plugins.buble({ exclude: '**/*.{ts,tsx}' }),
           // _plugins.nodent({
           //   noRuntime: true,
           //   promises: true,

@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- feat: Update `rollup-plugin-buble` dependency
 
 ## 0.3.13
 
