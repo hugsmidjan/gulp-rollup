@@ -3,22 +3,27 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.3.15
+
+_2019-10-31_
+
 - feat: Update `rollup-plugin-buble` dependency
 
-## 0.3.13
+## 0.3.13 – 0.3.14
 
 _2019-10-14_
 
 - feat: Update `rollup-plugin-typescript2` dependency
 
-## 0.3.11 / 0.3.12
+## 0.3.11 – 0.3.12
 
 _2019-10-04_
 
 - fix: Correctly apply `inputOpts` and `outputOpts` + rename `watchOpts`
 - fix: Stop searching for `tsconfig.json` at package root
 
-## 0.3.9 / 0.3.10
+## 0.3.9 – 0.3.10
 
 _2019-09-16_
 
@@ -26,7 +31,7 @@ _2019-09-16_
   presence of `typescriptOpts`. This is a truer indicator of the intent to use
   TypeScript than `typescript`/`tsc` being installed.
 
-## 0.3.7 / 0.3.8
+## 0.3.7 – 0.3.8
 
 _2019-09-11_
 
@@ -52,7 +57,7 @@ _2019-08-27_
 - fix: Use the raw `process.env.NODE_ENV` as default
 - fix: Move bublé plugin to earlier in the plugin list
 
-## 0.3.2 / 0.3.3
+## 0.3.2 – 0.3.3
 
 _2019-07-24_
 
@@ -80,7 +85,7 @@ _2019-05-15_
 - feat: Add automatic TypeScript compiling
 - docs: Add example of default/simple usage + mention exposed plugins/helper
 
-## 0.2.0 / 0.2.1
+## 0.2.0 – 0.2.1
 
 _2019-05-15_
 
