@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.3.17
+
+_2019-11-07_
+
 - feat: Turn off rollup-plugin-typescript2's cache by default – it's unsafe
   when writing declaration files
 
