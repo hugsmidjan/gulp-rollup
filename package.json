@@ -23,11 +23,11 @@
     "@rollup/plugin-buble": "^0.20.0",
     "@rollup/plugin-replace": "^2.2.0",
     "glob": "^7.1.4",
-    "rollup": "^1.17.0",
-    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup": "^1.25.0",
+    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-typescript2": "^0.24.3",
+    "rollup-plugin-typescript2": "^0.25.1",
     "rollup-plugin-uglify": "^6.0.2"
   }
 }
