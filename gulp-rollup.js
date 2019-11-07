@@ -64,6 +64,7 @@ const makeTSOpts = (opts) => {
   const tsconfigOverride = opts && opts.tsconfigOverride;
   const compilerOptions = (tsconfigOverride && tsconfigOverride.compilerOptions) || {};
   return {
+    clean: true, // Turn off rollup-plugin-typescript2's cache by default.
     ...opts,
     tsconfigOverride: {
       ...tsconfigOverride,
