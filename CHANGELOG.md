@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- feat: Drop Bublé for Babel (presets: env, react)
 
 ## 0.3.17
 

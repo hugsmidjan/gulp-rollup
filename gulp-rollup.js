@@ -2,17 +2,15 @@
 const { normalizeOpts } = require('@hugsmidjan/gulp-utils');
 const rollup = require('rollup');
 
-const hasTypescript = false;
-
 const _plugins = {
-  buble: require('@rollup/plugin-buble'),
+  babel: require('rollup-plugin-babel'),
   commonjs: require('rollup-plugin-commonjs'),
   json: require('rollup-plugin-json'),
   // nodent: require('rollup-plugin-nodent'), // simple+fast async/await
   nodeResolve: require('rollup-plugin-node-resolve'),
   replace: require('@rollup/plugin-replace'),
   typescript: require('rollup-plugin-typescript2'),
-  uglify: require('rollup-plugin-uglify').uglify,
+  terser: require('rollup-plugin-terser').terser,
 };
 const glob = require('glob');
 const { watch } = require('gulp');
@@ -49,7 +47,8 @@ const defaultOpts = {
   NODE_ENV: process.env.NODE_ENV,
   // plugins: [], // custom list of plugins
   // replaceOpts: {}, // custom options for rollup-plugin-replace
-  // uglifyOpts: {}, // custom options for rollup-plugin-uglify
+  // babelOpts: {}, // spread into the default babel options
+  // terserOpts: {}, // custom options for rollup-plugin-terser
   // typescriptOpts: {}, // custom options for rollup-plugin-typescript2
   minify: true,
   sourcemaps: true,
@@ -86,11 +85,33 @@ const handleTS = (opts) => {
     if (fs.existsSync(path + '/tsconfig.json')) {
       return true;
     } else if (fs.existsSync(path + '/package.json')) {
-			return false;
+      return false;
     }
     path = path.replace(/\/[^/]+?$/, '');
   }
   return false;
+};
+
+const makeBabelOpts = (opts/* , doPolyfill */) => {
+  return {
+    // https://github.com/rollup/rollup-plugin-babel#usage
+    exclude: 'node_modules/**',
+    // babelrc: false,
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          // ...(doPolyfill && {
+          //   corejs: { version: 3 /* , proposals: false */ },
+          //   useBuiltIns: 'usage',
+          // }),
+          loose: true,
+        },
+      ],
+      ['@babel/preset-react', {}],
+    ],
+    ...opts,
+  };
 };
 
 const getConfig = (opts) => {
@@ -107,11 +128,7 @@ const getConfig = (opts) => {
         opts.plugins || [
           _plugins.json(),
           handleTS(opts) && _plugins.typescript(makeTSOpts(opts.typescriptOpts)),
-          _plugins.buble({ exclude: '**/*.{ts,tsx}' }),
-          // _plugins.nodent({
-          //   noRuntime: true,
-          //   promises: true,
-          // }),
+          _plugins.babel(makeBabelOpts(opts.babelOpts/* , opts.autoPolyfill */)),
           _plugins.nodeResolve(),
           _plugins.commonjs(),
           _plugins.replace({
@@ -120,12 +137,9 @@ const getConfig = (opts) => {
           }),
           !opts.minify
             ? null
-            : _plugins.uglify({
+            : _plugins.terser({
                 output: { comments: 'some' },
-                compress: {
-                  // drop_console: true, // Meh, ESLint warnings should be sufficient
-                },
-                ...opts.uglifyOpts,
+                ...opts.terserOpts,
               }),
         ]
       ).filter((plugin) => !!plugin),
