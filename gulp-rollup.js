@@ -112,7 +112,10 @@ const getConfig = (opts) => {
           //   noRuntime: true,
           //   promises: true,
           // }),
-          _plugins.nodeResolve({ mainFields:['main'] }),
+          _plugins.nodeResolve({
+            mainFields: ['main'],
+            extensions: ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx'],
+          }),
           _plugins.commonjs(),
           _plugins.replace({
             'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
