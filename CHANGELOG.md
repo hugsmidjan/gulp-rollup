@@ -3,6 +3,8 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Only use the 'main' field of modules inside node_modules – this avoids
+  errors caused by widespread incorrect importing of React properties.
 
 ## 0.3.17
 

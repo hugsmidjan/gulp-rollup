@@ -86,7 +86,7 @@ const handleTS = (opts) => {
     if (fs.existsSync(path + '/tsconfig.json')) {
       return true;
     } else if (fs.existsSync(path + '/package.json')) {
-			return false;
+		return false;
     }
     path = path.replace(/\/[^/]+?$/, '');
   }
@@ -112,7 +112,7 @@ const getConfig = (opts) => {
           //   noRuntime: true,
           //   promises: true,
           // }),
-          _plugins.nodeResolve(),
+          _plugins.nodeResolve({ mainFields:['main'] }),
           _plugins.commonjs(),
           _plugins.replace({
             'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
