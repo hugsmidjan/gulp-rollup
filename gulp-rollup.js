@@ -129,7 +129,7 @@ const getConfig = (opts) => {
           _plugins.json(),
           handleTS(opts) && _plugins.typescript(makeTSOpts(opts.typescriptOpts)),
           _plugins.babel(makeBabelOpts(opts.babelOpts/* , opts.autoPolyfill */)),
-          _plugins.nodeResolve(),
+          _plugins.nodeResolve({ mainFields:['main'] }),
           _plugins.commonjs(),
           _plugins.replace({
             'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
