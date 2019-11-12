@@ -92,7 +92,7 @@ const handleTS = (opts) => {
   return false;
 };
 
-const makeBabelOpts = (opts/* , doPolyfill */) => {
+const makeBabelOpts = (opts /* , doPolyfill */) => {
   return {
     // https://github.com/rollup/rollup-plugin-babel#usage
     exclude: 'node_modules/**',
@@ -128,8 +128,11 @@ const getConfig = (opts) => {
         opts.plugins || [
           _plugins.json(),
           handleTS(opts) && _plugins.typescript(makeTSOpts(opts.typescriptOpts)),
-          _plugins.babel(makeBabelOpts(opts.babelOpts/* , opts.autoPolyfill */)),
-          _plugins.nodeResolve({ mainFields:['main'] }),
+          _plugins.babel(makeBabelOpts(opts.babelOpts /* , opts.autoPolyfill */)),
+          _plugins.nodeResolve({
+            mainFields: ['main'],
+            extensions: ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx'],
+          }),
           _plugins.commonjs(),
           _plugins.replace({
             'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),

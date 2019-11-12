@@ -5,6 +5,7 @@
 - ... <!-- Add new lines here. Version number will be decided later -->
 - feat: Drop Bublé for Babel (presets: env, react)
 - fix: Only use the 'main' field of modules inside node_modules
+- fix: Enable extensionless import of .ts/.tsx files in .js files
 
 ## 0.3.17
 
