@@ -12,7 +12,7 @@ const _plugins = {
   nodeResolve: require('rollup-plugin-node-resolve'),
   replace: require('@rollup/plugin-replace'),
   typescript: require('rollup-plugin-typescript2'),
-  uglify: require('rollup-plugin-uglify').uglify,
+  terser: require('rollup-plugin-terser').terser,
 };
 const glob = require('glob');
 const { watch } = require('gulp');
@@ -49,7 +49,7 @@ const defaultOpts = {
   NODE_ENV: process.env.NODE_ENV,
   // plugins: [], // custom list of plugins
   // replaceOpts: {}, // custom options for rollup-plugin-replace
-  // uglifyOpts: {}, // custom options for rollup-plugin-uglify
+  // terserOpts: {}, // custom options for rollup-plugin-terser
   // typescriptOpts: {}, // custom options for rollup-plugin-typescript2
   minify: true,
   sourcemaps: true,
@@ -123,12 +123,9 @@ const getConfig = (opts) => {
           }),
           !opts.minify
             ? null
-            : _plugins.uglify({
+            : _plugins.terser({
                 output: { comments: 'some' },
-                compress: {
-                  // drop_console: true, // Meh, ESLint warnings should be sufficient
-                },
-                ...opts.uglifyOpts,
+                ...opts.terserOpts,
               }),
         ]
       ).filter((plugin) => !!plugin),

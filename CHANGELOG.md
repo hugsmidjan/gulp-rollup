@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- feat: Use 'terser' instead of 'uglifyjs' for minifying modern JavaScript
 - fix: Only use the 'main' field of modules inside node_modules – this avoids
   errors caused by widespread incorrect importing of React properties
 - fix: Enable extensionless import of .ts/.tsx files in .js files

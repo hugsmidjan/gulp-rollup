@@ -25,7 +25,7 @@ const options = {
   NODE_ENV: process.env.NODE_ENV,
   // plugins: [], // custom list of plugins
   // replaceOpts: {}, // custom options for rollup-plugin-replace
-  // uglifyOpts: {}, // custom options for rollup-plugin-uglify
+  // terserOpts: {}, // custom options for rollup-plugin-terser
   // typescriptOpts: {}, // custom options for rollup-plugin-typescript2
   minify: true,
   sourcemaps: true,
