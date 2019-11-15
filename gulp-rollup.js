@@ -183,7 +183,11 @@ const taskFactory = (opts = {}, configger = (x) => x) => {
       if (e.code === 'BUNDLE_START' && isBuilt) {
         console.info(logPrefix, 'rolling', fileName);
       } else if (e.code === 'BUNDLE_END' && isBuilt) {
-        console.info(logPrefix, 'rolled', fileName);
+        const sec =
+          e.duration < 500
+            ? e.duration + ' ms'
+            : ('' + Math.round(e.duration / 10)).replace(/(..)$/, '.$1 s');
+        console.info(logPrefix, 'rolled', fileName + '  (' + sec + ')');
       } else if (e.code === 'ERROR' || e.code === 'FATAL') {
         console.error(logPrefix, e.code, e.error);
       }

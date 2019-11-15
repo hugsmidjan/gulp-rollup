@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- feat: Add duration info to log output
 - fix: Prefer `.js` over `.mjs` inside node_modules
 
 ## 0.3.18
