@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.3.19
+
+_2020-02-15_
+
 - feat: Add duration info to log output
 - fix: Prefer `.js` over `.mjs` inside node_modules
 
