@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.3.20
+
+_2020-02-28_
+
 - feat: Add `@rollup/plugin-alias` support
 
 ## 0.3.19
