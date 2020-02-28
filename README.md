@@ -26,6 +26,7 @@ const options = {
   // plugins: [], // custom list of plugins
   // replaceOpts: {}, // custom options for rollup-plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
+  // aliasOpts: {}, // custom options for @rollup/plugin-alias
   // typescriptOpts: {}, // custom options for rollup-plugin-typescript2
   minify: true,
   sourcemaps: true,

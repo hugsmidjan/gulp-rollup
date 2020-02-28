@@ -5,6 +5,7 @@ const rollup = require('rollup');
 const hasTypescript = false;
 
 const _plugins = {
+  alias: require('@rollup/plugin-alias'),
   buble: require('@rollup/plugin-buble'),
   commonjs: require('@rollup/plugin-commonjs'),
   json: require('@rollup/plugin-json'),
@@ -50,6 +51,7 @@ const defaultOpts = {
   // plugins: [], // custom list of plugins
   // replaceOpts: {}, // custom options for rollup-plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
+  // aliasOpts: {}, // custom options for @rollup/plugin-alias
   // typescriptOpts: {}, // custom options for rollup-plugin-typescript2
   minify: true,
   sourcemaps: true,
@@ -105,6 +107,7 @@ const getConfig = (opts) => {
       input: isFileNameInput ? opts.src + input : input,
       plugins: (
         opts.plugins || [
+          !!opts.aliasOpts && _plugins.alias(opts.aliasOpts),
           _plugins.json(),
           handleTS(opts) && _plugins.typescript(makeTSOpts(opts.typescriptOpts)),
           _plugins.buble({ exclude: '**/*.{ts,tsx}' }),
