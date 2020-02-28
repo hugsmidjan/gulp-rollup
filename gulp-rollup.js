@@ -2,8 +2,6 @@
 const { normalizeOpts } = require('@hugsmidjan/gulp-utils');
 const rollup = require('rollup');
 
-const hasTypescript = false;
-
 const _plugins = {
   alias: require('@rollup/plugin-alias'),
   buble: require('@rollup/plugin-buble'),
@@ -46,10 +44,11 @@ const defaultOpts = {
   src: 'src/',
   dist: 'pub/',
   glob: '*.{js,jsx,ts,tsx}', // which files to glob up as entry points
-  // entryPoints: null, // Advanced: rollup.input string array or input map
+  // entryPoints: null, // Advanced: rollup.input map - overrides the `glob` option
+  //                    // Example:  { 'bar/outfile-sans-ext': 'foo/infile.ts' }
   NODE_ENV: process.env.NODE_ENV,
   // plugins: [], // custom list of plugins
-  // replaceOpts: {}, // custom options for rollup-plugin-replace
+  // replaceOpts: {}, // custom options for @rollup/plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
   // aliasOpts: {}, // custom options for @rollup/plugin-alias
   // typescriptOpts: {}, // custom options for rollup-plugin-typescript2
@@ -124,12 +123,11 @@ const getConfig = (opts) => {
             'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
             ...opts.replaceOpts,
           }),
-          !opts.minify
-            ? null
-            : _plugins.terser({
-                output: { comments: 'some' },
-                ...opts.terserOpts,
-              }),
+          !!opts.minify &&
+            _plugins.terser({
+              output: { comments: 'some' },
+              ...opts.terserOpts,
+            }),
         ]
       ).filter((plugin) => !!plugin),
       ...opts.inputOpts,

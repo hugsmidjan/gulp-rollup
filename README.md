@@ -22,9 +22,10 @@ const options = {
   dist: 'pub/',
   glob: '*.{js,jsx,ts,tsx}', // Glob|Array<Glob> for entry points. Use '!' prefix to ignore
   // entryPoints: null, // Advanced: rollup.input map - overrides the `glob` option
+  //                    // Example:  { 'bar/outfile-sans-ext': 'foo/infile.ts' }
   NODE_ENV: process.env.NODE_ENV,
   // plugins: [], // custom list of plugins
-  // replaceOpts: {}, // custom options for rollup-plugin-replace
+  // replaceOpts: {}, // custom options for @rollup/plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
   // aliasOpts: {}, // custom options for @rollup/plugin-alias
   // typescriptOpts: {}, // custom options for rollup-plugin-typescript2
@@ -63,13 +64,15 @@ console.log(rollupTaskFactory.plugins);
 
 ## TypeScript support.
 
-This task automatically bundles TypeScript files, but it's BYOTS (Bring Your Own TypeScript).
+This task automatically bundles TypeScript files, but it's BYOTS (Bring Your
+Own TypeScript).
 
-The Typescript plugin is invoked if `typescriptOpts` are present (even if they're empty), or a `tsconfig.json` file is detected in/or above the current folder.
+The Typescript plugin is invoked if `typescriptOpts` are present (even if
+they're empty), or a `tsconfig.json` file is detected in/or above the current
+folder.
 
-It respects `./tsconfig.json`, but [some compiler options are forced](https://www.npmjs.com/package/rollup-plugin-typescript2#some-compiler-options-are-forced).
+It respects `./tsconfig.json`, but
+[some compiler options are forced](https://www.npmjs.com/package/rollup-plugin-typescript2#some-compiler-options-are-forced).
 
-Additionally, `compilerOptions.jsx` is hard-defaulted to `'react'`, but it can be overridden via `typescriptOpts.tsconfigOverride.compilerOptions.jsx`.
-
-
-
+Additionally, `compilerOptions.jsx` is hard-defaulted to `'react'`, but it can
+be overridden via `typescriptOpts.tsconfigOverride.compilerOptions.jsx`.
