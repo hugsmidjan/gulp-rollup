@@ -12,6 +12,7 @@ const _plugins = {
   replace: require('@rollup/plugin-replace'),
   typescript: require('rollup-plugin-typescript2'),
   terser: require('rollup-plugin-terser').terser,
+  preserveShebangs: require('rollup-plugin-preserve-shebangs'),
 };
 const glob = require('glob');
 const { watch } = require('gulp');
@@ -107,6 +108,7 @@ const getConfig = (opts) => {
       plugins: (
         opts.plugins || [
           !!opts.aliasOpts && _plugins.alias(opts.aliasOpts),
+          _plugins.preserveShebangs(),
           _plugins.json(),
           handleTS(opts) && _plugins.typescript(makeTSOpts(opts.typescriptOpts)),
           _plugins.buble({ exclude: '**/*.{ts,tsx}' }),

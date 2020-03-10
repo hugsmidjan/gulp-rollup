@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- feat: Preserve "shebang" headers (e.g. `#!/usr/bin/env node`)
 
 ## 0.3.20
 
