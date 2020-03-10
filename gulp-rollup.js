@@ -12,7 +12,7 @@ const _plugins = {
   replace: require('@rollup/plugin-replace'),
   typescript: require('rollup-plugin-typescript2'),
   terser: require('rollup-plugin-terser').terser,
-  preserveShebangs: require('rollup-plugin-preserve-shebangs'),
+  preserveShebangs: require('rollup-plugin-preserve-shebangs').preserveShebangs,
 };
 const glob = require('glob');
 const { watch } = require('gulp');
