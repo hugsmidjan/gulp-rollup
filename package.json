@@ -28,7 +28,7 @@
     "@rollup/plugin-replace": "^2.2.0",
     "glob": "^7.1.6",
     "rollup": "^1.31.1",
-    "rollup-plugin-preserve-shebang": "^0.1.6",
+    "rollup-plugin-preserve-shebangs": "^0.1.2",
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-typescript2": "^0.26.0"
   }

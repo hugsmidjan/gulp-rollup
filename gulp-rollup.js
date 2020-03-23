@@ -12,7 +12,7 @@ const _plugins = {
   replace: require('@rollup/plugin-replace'),
   typescript: require('rollup-plugin-typescript2'),
   terser: require('rollup-plugin-terser').terser,
-  preserveShebang: require('rollup-plugin-preserve-shebang'),
+  preserveShebangs: require('rollup-plugin-preserve-shebangs').preserveShebangs,
 };
 const glob = require('glob');
 const { watch } = require('gulp');
@@ -108,7 +108,8 @@ const getConfig = (opts) => {
       plugins: (
         opts.plugins || [
           !!opts.aliasOpts && _plugins.alias(opts.aliasOpts),
-          _plugins.preserveShebang(),
+          !opts.sourcemaps && _plugins.preserveShebangs(), // Temporary workaround until this has been merged https://github.com/elado/rollup-plugin-preserve-shebangs/pull/2
+          // _plugins.preserveShebangs(),
           _plugins.json(),
           handleTS(opts) && _plugins.typescript(makeTSOpts(opts.typescriptOpts)),
           _plugins.buble({ exclude: '**/*.{ts,tsx}' }),
