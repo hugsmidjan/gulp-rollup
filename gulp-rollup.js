@@ -108,8 +108,7 @@ const getConfig = (opts) => {
       plugins: (
         opts.plugins || [
           !!opts.aliasOpts && _plugins.alias(opts.aliasOpts),
-          !opts.sourcemaps && _plugins.preserveShebangs(), // Temporary workaround until this has been merged https://github.com/elado/rollup-plugin-preserve-shebangs/pull/2
-          // _plugins.preserveShebangs(),
+          _plugins.preserveShebangs(),
           _plugins.json(),
           handleTS(opts) && _plugins.typescript(makeTSOpts(opts.typescriptOpts)),
           _plugins.buble({ exclude: '**/*.{ts,tsx}' }),
