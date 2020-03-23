@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Use correct preserve shebang plugin. Ack!
 
 ## 0.3.21 – 0.3.22
 
