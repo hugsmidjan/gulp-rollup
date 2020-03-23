@@ -4,11 +4,11 @@
 
 - ... <!-- Add new lines here. Version number will be decided later -->
 
-## 0.3.23 – 0.3.24
+## 0.3.23 – 0.3.25
 
 _2020-03-23_
 
-- fix: Suppress shebang plugin causing sourcemap warning
+- fix: Upgrade shebang plugin to a version that supports sourcemaps
 
 ## 0.3.21 – 0.3.22
 
