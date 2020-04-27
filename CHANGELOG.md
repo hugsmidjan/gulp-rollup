@@ -3,6 +3,8 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- **BREAKING** feat: Upgrade `rollup` to v2
+- **BREAKING** feat: Switch to `@rollup/plugin-typescript`
 
 ## 0.3.23 – 0.3.25
 

@@ -10,7 +10,7 @@ const _plugins = {
   // nodent: require('rollup-plugin-nodent'), // simple+fast async/await
   nodeResolve: require('@rollup/plugin-node-resolve'),
   replace: require('@rollup/plugin-replace'),
-  typescript: require('rollup-plugin-typescript2'),
+  typescript: require('@rollup/plugin-typescript'),
   terser: require('rollup-plugin-terser').terser,
   preserveShebangs: require('rollup-plugin-preserve-shebangs').preserveShebangs,
 };
@@ -52,7 +52,7 @@ const defaultOpts = {
   // replaceOpts: {}, // custom options for @rollup/plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
   // aliasOpts: {}, // custom options for @rollup/plugin-alias
-  // typescriptOpts: {}, // custom options for rollup-plugin-typescript2
+  // typescriptOpts: {}, // custom options for @rollup/plugin-typescript
   minify: true,
   sourcemaps: true,
   format: 'iife', // Rollup output format
@@ -60,22 +60,6 @@ const defaultOpts = {
   // inputOpts: {},
   // outputOpts: {},
   // watchOptions: {},
-};
-
-const makeTSOpts = (opts) => {
-  const tsconfigOverride = opts && opts.tsconfigOverride;
-  const compilerOptions = (tsconfigOverride && tsconfigOverride.compilerOptions) || {};
-  return {
-    clean: true, // Turn off rollup-plugin-typescript2's cache by default.
-    ...opts,
-    tsconfigOverride: {
-      ...tsconfigOverride,
-      compilerOptions: {
-        ...compilerOptions,
-        jsx: compilerOptions.jsx || 'react',
-      },
-    },
-  };
 };
 
 const handleTS = (opts) => {
@@ -110,7 +94,11 @@ const getConfig = (opts) => {
           !!opts.aliasOpts && _plugins.alias(opts.aliasOpts),
           _plugins.preserveShebangs(),
           _plugins.json(),
-          handleTS(opts) && _plugins.typescript(makeTSOpts(opts.typescriptOpts)),
+          handleTS(opts) &&
+            _plugins.typescript({
+              jsx: 'react', // Override tsconfig.json by default
+              ...opts.typescriptOpts,
+            }),
           _plugins.buble({ exclude: '**/*.{ts,tsx}' }),
           // _plugins.nodent({
           //   noRuntime: true,

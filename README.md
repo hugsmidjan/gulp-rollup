@@ -28,7 +28,7 @@ const options = {
   // replaceOpts: {}, // custom options for @rollup/plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
   // aliasOpts: {}, // custom options for @rollup/plugin-alias
-  // typescriptOpts: {}, // custom options for rollup-plugin-typescript2
+  // typescriptOpts: {}, // custom options for @rollup/plugin-typescript
   minify: true,
   sourcemaps: true,
   format: 'iife', // Rollup output format
@@ -72,7 +72,7 @@ they're empty), or a `tsconfig.json` file is detected in/or above the current
 folder.
 
 It respects `./tsconfig.json`, but
-[some compiler options are forced](https://www.npmjs.com/package/rollup-plugin-typescript2#some-compiler-options-are-forced).
+[some compiler options are ignored](https://github.com/rollup/plugins/tree/master/packages/typescript#ignored-options).
 
 Additionally, `compilerOptions.jsx` is hard-defaulted to `'react'`, but it can
-be overridden via `typescriptOpts.tsconfigOverride.compilerOptions.jsx`.
+be overridden via `typescriptOpts.jsx`.
