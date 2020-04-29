@@ -1,6 +1,8 @@
 /* global process */
 const { normalizeOpts } = require('@hugsmidjan/gulp-utils');
 const rollup = require('rollup');
+const { existsSync, readFileSync, writeFileSync } = require('fs');
+const { relative } = require('path');
 
 const _plugins = {
   alias: require('@rollup/plugin-alias'),
@@ -52,7 +54,10 @@ const defaultOpts = {
   // replaceOpts: {}, // custom options for @rollup/plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
   // aliasOpts: {}, // custom options for @rollup/plugin-alias
-  // typescriptOpts: {}, // custom options for @rollup/plugin-typescript
+  // typescriptOpts: {
+  //   rawDeclarations: false // true turns off auto-tidying
+  //   // custom options for @rollup/plugin-typescript
+  // },
   minify: true,
   sourcemaps: true,
   format: 'iife', // Rollup output format
@@ -62,21 +67,50 @@ const defaultOpts = {
   // watchOptions: {},
 };
 
-const handleTS = (opts) => {
-  if (opts.typescriptOpts) {
-    return true;
+const findTsConfig = (customTsConfig) => {
+  if (customTsConfig) {
+    if (existsSync(customTsConfig)) {
+      return customTsConfig;
+    }
+    console.error(customTsConfig + ' does not exist.');
   }
-  const fs = require('fs');
   let path = process.cwd();
   while (path) {
-    if (fs.existsSync(path + '/tsconfig.json')) {
-      return true;
-    } else if (fs.existsSync(path + '/package.json')) {
-      return false;
+    const tsFile = path + '/tsconfig.json';
+    if (existsSync(tsFile)) {
+      return tsFile;
+    } else if (existsSync(path + '/package.json')) {
+      return;
     }
     path = path.replace(/\/[^/]+?$/, '');
   }
-  return false;
+};
+
+const jsonc2json = (str) => str.replace(/\/\/.+?(\n|$)/g, '');
+
+const getNormalizedTSOpts = (opts) => {
+  const { rawDeclarations, ...tsOpts } = opts.typescriptOpts || {};
+  const rawDecl = rawDeclarations || Array.isArray(opts.outputOpts);
+  const tsConfigFile = findTsConfig(tsOpts.tsconfig);
+  if (tsConfigFile) {
+    const cOpts = JSON.parse(jsonc2json(readFileSync(tsConfigFile).toString()))
+      .compilerOptions;
+    const declaration =
+      tsOpts.declaration != null ? tsOpts.declaration : cOpts.declaration;
+    const overrideDeclDir = declaration && !rawDecl;
+
+    return [
+      rawDecl,
+      {
+        jsx: 'react', // Override tsconfig.json by default
+        rootDir: cOpts.rootDir != null ? cOpts.rootDir : opts.src,
+        declaration,
+        ...tsOpts,
+        ...(overrideDeclDir && { declarationDir: opts.dist + '__types/' }),
+      },
+    ];
+  }
+  return [rawDecl, undefined];
 };
 
 const getConfig = (opts) => {
@@ -94,11 +128,7 @@ const getConfig = (opts) => {
           !!opts.aliasOpts && _plugins.alias(opts.aliasOpts),
           _plugins.preserveShebangs(),
           _plugins.json(),
-          handleTS(opts) &&
-            _plugins.typescript({
-              jsx: 'react', // Override tsconfig.json by default
-              ...opts.typescriptOpts,
-            }),
+          opts.typescriptOpts && _plugins.typescript(opts.typescriptOpts),
           _plugins.buble({ exclude: '**/*.{ts,tsx}' }),
           // _plugins.nodent({
           //   noRuntime: true,
@@ -148,17 +178,63 @@ const getConfig = (opts) => {
   }
 };
 
+const tsExtRe = /\.tsx?$/;
+const isTsFile = (file) => tsExtRe.test(file);
+const getPath = (file) => (/\//.test(file) ? file.replace(/\/[^/]+$/, '') : '');
+const stripExt = (file) => file.replace(/\.[^.]+$/, '');
+
 const taskFactory = (opts = {}, configger = (x) => x) => {
   opts = normalizeOpts(opts, defaultOpts);
   opts.src = (opts.src + '/').replace(/\/\/$/, '/');
   opts.dist = (opts.dist + '/').replace(/\/\/$/, '/');
+  const [rawDeclarations, tsOpts] = getNormalizedTSOpts(opts);
+  opts.typescriptOpts = tsOpts;
 
   const bundleTask = () => {
     const rollupConfig = getConfig(opts).map(configger);
-    const rollups = rollupConfig.map((config) => {
-      return rollup.rollup(config).then((bundle) => bundle.write(config.output));
-    });
-    return Promise.all(rollups);
+
+    return Promise.all(
+      rollupConfig.map((config) => {
+        return rollup.rollup(config).then((bundle) =>
+          bundle.write(config.output).then(() => {
+            const tsOpts = opts.typescriptOpts || {};
+
+            if (tsOpts.declaration && !rawDeclarations) {
+              const distFolder = config.output.dir || opts.dist;
+              let entryPointMap = config.input;
+              if (typeof entryPointMap === 'string') {
+                const outToken = stripExt(config.output.file.slice(distFolder.length));
+                entryPointMap = { [outToken]: entryPointMap };
+              }
+              Object.entries(entryPointMap)
+                .filter((entry) => isTsFile(entry[1]))
+                .forEach(([outToken, sourceFile]) => {
+                  const outFile = distFolder + outToken + '.d.ts';
+                  const tsDeclFile =
+                    './' +
+                    relative(
+                      getPath(outFile),
+                      tsOpts.declarationDir +
+                        relative(tsOpts.rootDir, opts.src) +
+                        '/' +
+                        stripExt(sourceFile.slice(opts.src.length))
+                    );
+
+                  writeFileSync(
+                    outFile,
+                    [
+                      'export * from "' + tsDeclFile + '";',
+                      'import x from "' + tsDeclFile + '";',
+                      'export default x;',
+                      '',
+                    ].join('\n')
+                  );
+                });
+            }
+          })
+        );
+      })
+    );
   };
   bundleTask.displayName = opts.name;
 

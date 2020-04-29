@@ -28,7 +28,10 @@ const options = {
   // replaceOpts: {}, // custom options for @rollup/plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
   // aliasOpts: {}, // custom options for @rollup/plugin-alias
-  // typescriptOpts: {}, // custom options for @rollup/plugin-typescript
+  // typescriptOpts: {
+  //   rawDeclarations: false // true turns off auto-tidying
+  //   // custom options for @rollup/plugin-typescript
+  // },
   minify: true,
   sourcemaps: true,
   format: 'iife', // Rollup output format
