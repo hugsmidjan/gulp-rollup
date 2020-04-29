@@ -1,6 +1,6 @@
 {
   "name": "@hugsmidjan/gulp-rollup",
-  "version": "0.3.25",
+  "version": "0.4.0",
   "description": "script bundling gulp task using rollup",
   "main": "gulp-rollup.js",
   "scripts": {

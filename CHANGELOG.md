@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.4.0
+
+_2020-04-29_
+
 - **BREAKING** feat: Upgrade `rollup` to v2
 - **BREAKING** feat: Switch to `@rollup/plugin-typescript`
 - feat: Auto-tidy TypeScript declarations – unless
