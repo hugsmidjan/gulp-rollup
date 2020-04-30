@@ -121,10 +121,6 @@ const getConfig = (opts) => {
           opts.typescriptOpts &&
             require('@rollup/plugin-typescript')(opts.typescriptOpts),
           require('@rollup/plugin-buble')({ exclude: '**/*.{ts,tsx}' }),
-          // _plugins.nodent({
-          //   noRuntime: true,
-          //   promises: true,
-          // }),
           require('@rollup/plugin-node-resolve')({
             mainFields: ['main'],
             extensions: [/* '.mjs',  */ '.js', '.jsx', '.json', '.ts', '.tsx'],
