@@ -4,17 +4,6 @@ const rollup = require('rollup');
 const { existsSync, readFileSync, writeFileSync } = require('fs');
 const { relative } = require('path');
 
-const _plugins = {
-  alias: require('@rollup/plugin-alias'),
-  buble: require('@rollup/plugin-buble'),
-  commonjs: require('@rollup/plugin-commonjs'),
-  json: require('@rollup/plugin-json'),
-  // nodent: require('rollup-plugin-nodent'), // simple+fast async/await
-  nodeResolve: require('@rollup/plugin-node-resolve'),
-  replace: require('@rollup/plugin-replace'),
-  terser: require('rollup-plugin-terser').terser,
-  preserveShebangs: require('rollup-plugin-preserve-shebangs').preserveShebangs,
-};
 const glob = require('glob');
 const { watch } = require('gulp');
 
@@ -126,27 +115,27 @@ const getConfig = (opts) => {
       input: isFileNameInput ? opts.src + input : input,
       plugins: (
         opts.plugins || [
-          !!opts.aliasOpts && _plugins.alias(opts.aliasOpts),
-          _plugins.preserveShebangs(),
-          _plugins.json(),
+          !!opts.aliasOpts && require('@rollup/plugin-alias')(opts.aliasOpts),
+          require('rollup-plugin-preserve-shebangs').preserveShebangs(),
+          require('@rollup/plugin-json')(),
           opts.typescriptOpts &&
             require('@rollup/plugin-typescript')(opts.typescriptOpts),
-          _plugins.buble({ exclude: '**/*.{ts,tsx}' }),
+          require('@rollup/plugin-buble')({ exclude: '**/*.{ts,tsx}' }),
           // _plugins.nodent({
           //   noRuntime: true,
           //   promises: true,
           // }),
-          _plugins.nodeResolve({
+          require('@rollup/plugin-node-resolve')({
             mainFields: ['main'],
             extensions: [/* '.mjs',  */ '.js', '.jsx', '.json', '.ts', '.tsx'],
           }),
-          _plugins.commonjs(),
-          _plugins.replace({
+          require('@rollup/plugin-commonjs')(),
+          require('@rollup/plugin-replace')({
             'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
             ...opts.replaceOpts,
           }),
           !!opts.minify &&
-            _plugins.terser({
+            require('rollup-plugin-terser').terser({
               output: { comments: 'some' },
               ...opts.terserOpts,
             }),
@@ -287,7 +276,5 @@ const taskFactory = (opts = {}, configger = (x) => x) => {
 
   return ret;
 };
-
-taskFactory.plugins = _plugins;
 
 module.exports = taskFactory;

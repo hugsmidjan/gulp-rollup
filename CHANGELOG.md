@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- **BREAKING** feat: Stop exposing `plugins` on the factory object.
 
 ## 0.4.1 – 0.4.2
 

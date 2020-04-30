@@ -58,13 +58,6 @@ const [scripts, scriptsWatch] = scriptTasks;
 const { bundle, watch } = scriptTasks;
 ```
 
-For convenience, the "task factory" function also exposes the rollup plugins
-it uses, as well as its file-globbing module.
-
-```js
-console.log(rollupTaskFactory.plugins);
-```
-
 ## TypeScript support.
 
 This task automatically bundles TypeScript files, but it's BYOTS (Bring Your
