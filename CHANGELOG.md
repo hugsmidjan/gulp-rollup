@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Only require/load `@rollup/plugin-typescript` if tsconfig is detected
 
 ## 0.4.1
 

@@ -12,7 +12,6 @@ const _plugins = {
   // nodent: require('rollup-plugin-nodent'), // simple+fast async/await
   nodeResolve: require('@rollup/plugin-node-resolve'),
   replace: require('@rollup/plugin-replace'),
-  typescript: require('@rollup/plugin-typescript'),
   terser: require('rollup-plugin-terser').terser,
   preserveShebangs: require('rollup-plugin-preserve-shebangs').preserveShebangs,
 };
@@ -130,7 +129,8 @@ const getConfig = (opts) => {
           !!opts.aliasOpts && _plugins.alias(opts.aliasOpts),
           _plugins.preserveShebangs(),
           _plugins.json(),
-          opts.typescriptOpts && _plugins.typescript(opts.typescriptOpts),
+          opts.typescriptOpts &&
+            require('@rollup/plugin-typescript')(opts.typescriptOpts),
           _plugins.buble({ exclude: '**/*.{ts,tsx}' }),
           // _plugins.nodent({
           //   noRuntime: true,
