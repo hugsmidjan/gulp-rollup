@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.4.1
+
+_2020-04-30_
+
 - fix: Only set tsc rootDir if we're generating clean declaration files
 
 ## 0.4.0
