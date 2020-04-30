@@ -3,12 +3,12 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
-- fix: Only require/load `@rollup/plugin-typescript` if tsconfig is detected
 
-## 0.4.1
+## 0.4.1 – 0.4.2
 
 _2020-04-30_
 
+- fix: Only require/load `@rollup/plugin-typescript` if tsconfig is detected
 - fix: Only set tsc rootDir if we're generating clean declaration files
 
 ## 0.4.0
