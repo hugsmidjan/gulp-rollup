@@ -63,9 +63,8 @@ const { bundle, watch } = scriptTasks;
 This task automatically bundles TypeScript files, but it's BYOTS (Bring Your
 Own TypeScript).
 
-The Typescript plugin is invoked if `typescriptOpts` are present (even if
-they're empty), or a `tsconfig.json` file is detected in/or above the current
-folder.
+The Typescript plugin is invoked if a `tsconfig.json` file is detected in/or
+above the current folder, or via the `typescriptOpts.tsconfig` option.
 
 It respects `./tsconfig.json`, but
 [some compiler options are ignored](https://github.com/rollup/plugins/tree/master/packages/typescript#ignored-options).
