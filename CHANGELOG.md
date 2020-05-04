@@ -9,7 +9,7 @@
 _2020-05-04_
 
 - **BREAKING** feat: Stop exposing `plugins` on the factory object.
-- fix: Read tsconfigs with `"extends"` field
+- fix: Warn about tsconfigs with `"extends"` field
 
 ## 0.4.1 – 0.4.2
 

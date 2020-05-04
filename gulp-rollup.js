@@ -74,31 +74,38 @@ const findTsConfig = (customTsConfig) => {
   }
 };
 
+const jsonc2json = (str) => str.replace(/\/\/.+?(\n|$)/g, '');
+
 const getNormalizedTSOpts = (opts) => {
   const { rawDeclarations, ...tsOpts } = opts.typescriptOpts || {};
   const rawDecl = rawDeclarations || Array.isArray(opts.outputOpts);
   const tsConfigFile = findTsConfig(tsOpts.tsconfig);
   if (tsConfigFile) {
-    const { config /* , error */ } = require('typescript').readConfigFile(tsConfigFile);
-    if (config) {
-      const cOpts = config.compilerOptions;
-      const declaration =
-        tsOpts.declaration != null ? tsOpts.declaration : cOpts.declaration;
-      const overrideDeclDir = declaration && !rawDecl;
-
-      return [
-        rawDecl,
-        {
-          jsx: 'react', // Override tsconfig.json by default
-          // Ensure rootDir is defined and set to a sensible default
-          // if we're auto-generating clean declaration files.
-          ...(overrideDeclDir && cOpts.rootDir == null && { rootDir: opts.src }),
-          declaration,
-          ...tsOpts,
-          ...(overrideDeclDir && { declarationDir: opts.dist + '__types/' }),
-        },
-      ];
+    const config = JSON.parse(jsonc2json(readFileSync(tsConfigFile).toString()));
+    const cOpts = config.compilerOptions || {};
+    if ((config.extends && cOpts.declaration == null) || cOpts.rootDir == null) {
+      console.warn(
+        'NOTE: @hugsmidjan/gulp-rollup does not fully support tsconfig "extends".\n' +
+          'Your `declaration` and `rootdir` compiler options MAY get overwritten.\n' +
+          '--'
+      );
     }
+    const declaration =
+      tsOpts.declaration != null ? tsOpts.declaration : cOpts.declaration;
+    const overrideDeclDir = declaration && !rawDecl;
+
+    return [
+      rawDecl,
+      {
+        jsx: 'react', // Override tsconfig.json by default
+        // Ensure rootDir is defined and set to a sensible default
+        // if we're auto-generating clean declaration files.
+        ...(overrideDeclDir && cOpts.rootDir == null && { rootDir: opts.src }),
+        declaration,
+        ...tsOpts,
+        ...(overrideDeclDir && { declarationDir: opts.dist + '__types/' }),
+      },
+    ];
   }
   return [rawDecl, undefined];
 };
