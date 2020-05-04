@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- feat: Support `outputOpts` array
 
 ## 0.5.0 – 0.5.1
 

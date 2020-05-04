@@ -51,7 +51,7 @@ const defaultOpts = {
   format: 'iife', // Rollup output format
   codeSplit: true, // (when format isn't 'iife')
   // inputOpts: {},
-  // outputOpts: {},
+  // outputOpts: {}, // or Array of option objects
   // watchOptions: {},
 };
 
@@ -120,6 +120,15 @@ const getConfig = (opts) => {
         // Leave *.esm as is.
         { file: opts.dist + input.replace(/\.(?:tsx?|jsx)$/, '.js') }
       : { dir: opts.dist };
+
+    const makeOutputOpts = (outputOpts) => ({
+      ...outputDist,
+      format: opts.format,
+      sourcemap: opts.sourcemaps,
+      // sourcemapExcludeSources: true,
+      ...outputOpts,
+    });
+
     return {
       input: isFileNameInput ? opts.src + input : input,
       plugins: (
@@ -147,13 +156,9 @@ const getConfig = (opts) => {
         ]
       ).filter((plugin) => !!plugin),
       ...opts.inputOpts,
-      output: {
-        ...outputDist,
-        format: opts.format,
-        sourcemap: opts.sourcemaps,
-        // sourcemapExcludeSources: true,
-        ...opts.outputOpts,
-      },
+      output: Array.isArray(opts.outputOpts)
+        ? opts.outputOpts.map(makeOutputOpts)
+        : makeOutputOpts(opts.outputOpts),
       watch: {
         exclude: 'node_modules/**',
         ...opts.watchOpts,

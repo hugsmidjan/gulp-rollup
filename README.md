@@ -37,7 +37,7 @@ const options = {
   format: 'iife', // Rollup output format
   codeSplit: true, // (kicks in when format isn't 'iife')
   // inputOpts: {},
-  // outputOpts: {},
+  // outputOpts: {}, // or Array of option objects
   // watchOpts: {},
 };
 
