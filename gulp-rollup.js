@@ -197,42 +197,46 @@ const taskFactory = (opts = {}, configger = (x) => x) => {
     return Promise.all(
       rollupConfig.map((config) => {
         return rollup.rollup(config).then((bundle) =>
-          bundle.write(config.output).then(() => {
-            const tsOpts = opts.typescriptOpts || {};
+          Array.isArray(config.output)
+            ? Promise.all(config.output.map((outputOpts) => bundle.write(outputOpts)))
+            : bundle.write(config.output).then(() => {
+                const tsOpts = opts.typescriptOpts || {};
 
-            if (tsOpts.declaration && !rawDeclarations) {
-              const distFolder = config.output.dir || opts.dist;
-              let entryPointMap = config.input;
-              if (typeof entryPointMap === 'string') {
-                const outToken = stripExt(config.output.file.slice(distFolder.length));
-                entryPointMap = { [outToken]: entryPointMap };
-              }
-              Object.entries(entryPointMap)
-                .filter((entry) => isTsFile(entry[1]))
-                .forEach(([outToken, sourceFile]) => {
-                  const outFile = distFolder + outToken + '.d.ts';
-                  const tsDeclFile =
-                    './' +
-                    relative(
-                      getPath(outFile),
-                      tsOpts.declarationDir +
-                        relative(tsOpts.rootDir, opts.src) +
-                        '/' +
-                        stripExt(sourceFile.slice(opts.src.length))
+                if (tsOpts.declaration && !rawDeclarations) {
+                  const distFolder = config.output.dir || opts.dist;
+                  let entryPointMap = config.input;
+                  if (typeof entryPointMap === 'string') {
+                    const outToken = stripExt(
+                      config.output.file.slice(distFolder.length)
                     );
+                    entryPointMap = { [outToken]: entryPointMap };
+                  }
+                  Object.entries(entryPointMap)
+                    .filter((entry) => isTsFile(entry[1]))
+                    .forEach(([outToken, sourceFile]) => {
+                      const outFile = distFolder + outToken + '.d.ts';
+                      const tsDeclFile =
+                        './' +
+                        relative(
+                          getPath(outFile),
+                          tsOpts.declarationDir +
+                            relative(tsOpts.rootDir, opts.src) +
+                            '/' +
+                            stripExt(sourceFile.slice(opts.src.length))
+                        );
 
-                  writeFileSync(
-                    outFile,
-                    [
-                      'export * from "' + tsDeclFile + '";',
-                      'import x from "' + tsDeclFile + '";',
-                      'export default x;',
-                      '',
-                    ].join('\n')
-                  );
-                });
-            }
-          })
+                      writeFileSync(
+                        outFile,
+                        [
+                          'export * from "' + tsDeclFile + '";',
+                          'import x from "' + tsDeclFile + '";',
+                          'export default x;',
+                          '',
+                        ].join('\n')
+                      );
+                    });
+                }
+              })
         );
       })
     );
