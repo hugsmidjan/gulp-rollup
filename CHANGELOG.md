@@ -3,13 +3,13 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
-- feat: Support `outputOpts` array
 
-## 0.5.0 – 0.5.1
+## 0.5.0 – 0.5.2
 
 _2020-05-04_
 
 - **BREAKING** feat: Stop exposing `plugins` on the factory object.
+- feat: Support `outputOpts` array
 - fix: Warn about tsconfigs with `"extends"` field
 - fix: Always set `typescriptOpts.rootDir` when autofixing .d.ts files
 
