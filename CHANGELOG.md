@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Always set `typescriptOpts.rootDir` when autofixing .d.ts files
 
 ## 0.5.0
 

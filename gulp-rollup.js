@@ -100,7 +100,9 @@ const getNormalizedTSOpts = (opts) => {
         jsx: 'react', // Override tsconfig.json by default
         // Ensure rootDir is defined and set to a sensible default
         // if we're auto-generating clean declaration files.
-        ...(overrideDeclDir && cOpts.rootDir == null && { rootDir: opts.src }),
+        ...(overrideDeclDir && {
+          rootDir: cOpts.rootDir != null ? cOpts.rootDir : opts.src,
+        }),
         declaration,
         ...tsOpts,
         ...(overrideDeclDir && { declarationDir: opts.dist + '__types/' }),
