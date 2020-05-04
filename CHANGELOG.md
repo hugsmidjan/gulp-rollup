@@ -3,14 +3,14 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
-- fix: Always set `typescriptOpts.rootDir` when autofixing .d.ts files
 
-## 0.5.0
+## 0.5.0 – 0.5.1
 
 _2020-05-04_
 
 - **BREAKING** feat: Stop exposing `plugins` on the factory object.
 - fix: Warn about tsconfigs with `"extends"` field
+- fix: Always set `typescriptOpts.rootDir` when autofixing .d.ts files
 
 ## 0.4.1 – 0.4.2
 
