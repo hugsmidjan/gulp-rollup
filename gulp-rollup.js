@@ -74,31 +74,31 @@ const findTsConfig = (customTsConfig) => {
   }
 };
 
-const jsonc2json = (str) => str.replace(/\/\/.+?(\n|$)/g, '');
-
 const getNormalizedTSOpts = (opts) => {
   const { rawDeclarations, ...tsOpts } = opts.typescriptOpts || {};
   const rawDecl = rawDeclarations || Array.isArray(opts.outputOpts);
   const tsConfigFile = findTsConfig(tsOpts.tsconfig);
   if (tsConfigFile) {
-    const cOpts = JSON.parse(jsonc2json(readFileSync(tsConfigFile).toString()))
-      .compilerOptions;
-    const declaration =
-      tsOpts.declaration != null ? tsOpts.declaration : cOpts.declaration;
-    const overrideDeclDir = declaration && !rawDecl;
+    const { config /* , error */ } = require('typescript').readConfigFile(tsConfigFile);
+    if (config) {
+      const cOpts = config.compilerOptions;
+      const declaration =
+        tsOpts.declaration != null ? tsOpts.declaration : cOpts.declaration;
+      const overrideDeclDir = declaration && !rawDecl;
 
-    return [
-      rawDecl,
-      {
-        jsx: 'react', // Override tsconfig.json by default
-        // Ensure rootDir is defined and set to a sensible default
-        // if we're auto-generating clean declaration files.
-        ...(overrideDeclDir && cOpts.rootDir == null && { rootDir: opts.src }),
-        declaration,
-        ...tsOpts,
-        ...(overrideDeclDir && { declarationDir: opts.dist + '__types/' }),
-      },
-    ];
+      return [
+        rawDecl,
+        {
+          jsx: 'react', // Override tsconfig.json by default
+          // Ensure rootDir is defined and set to a sensible default
+          // if we're auto-generating clean declaration files.
+          ...(overrideDeclDir && cOpts.rootDir == null && { rootDir: opts.src }),
+          declaration,
+          ...tsOpts,
+          ...(overrideDeclDir && { declarationDir: opts.dist + '__types/' }),
+        },
+      ];
+    }
   }
   return [rawDecl, undefined];
 };
