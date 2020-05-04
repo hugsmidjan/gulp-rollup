@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.5.0
+
+_2020-05-04_
+
 - **BREAKING** feat: Stop exposing `plugins` on the factory object.
 - fix: Read tsconfigs with `"extends"` field
 
