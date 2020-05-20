@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.6.0
+
+_2020-05-20_
+
 - **BREAKING** feat: `options.plugins` is now a function
 
 ## 0.5.0 – 0.5.3
