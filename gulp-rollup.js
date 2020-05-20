@@ -38,7 +38,7 @@ const defaultOpts = {
   // entryPoints: null, // Advanced: rollup.input map - overrides the `glob` option
   //                    // Example:  { 'bar/outfile-sans-ext': 'foo/infile.ts' }
   NODE_ENV: process.env.NODE_ENV,
-  // plugins: [], // custom list of plugins
+  // plugins: (pluginsArray) => pluginsArray, // Supply your own plugin list
   // replaceOpts: {}, // custom options for @rollup/plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
   // aliasOpts: {}, // custom options for @rollup/plugin-alias
@@ -131,8 +131,8 @@ const getConfig = (opts) => {
 
     return {
       input: isFileNameInput ? opts.src + input : input,
-      plugins: (
-        opts.plugins || [
+      plugins: opts
+        .plugins([
           !!opts.aliasOpts && require('@rollup/plugin-alias')(opts.aliasOpts),
           require('rollup-plugin-preserve-shebangs').preserveShebangs(),
           require('@rollup/plugin-json')(),
@@ -153,8 +153,8 @@ const getConfig = (opts) => {
               output: { comments: 'some' },
               ...opts.terserOpts,
             }),
-        ]
-      ).filter((plugin) => !!plugin),
+        ])
+        .filter((plugin) => !!plugin),
       ...opts.inputOpts,
       output: Array.isArray(opts.outputOpts)
         ? opts.outputOpts.map(makeOutputOpts)
@@ -190,6 +190,7 @@ const taskFactory = (opts = {}, configger = (x) => x) => {
   opts.dist = (opts.dist + '/').replace(/\/\/$/, '/');
   const [rawDeclarations, tsOpts] = getNormalizedTSOpts(opts);
   opts.typescriptOpts = tsOpts;
+  opts.plugins = opts.plugins || ((x) => x);
 
   const bundleTask = () => {
     const rollupConfig = getConfig(opts).map(configger);

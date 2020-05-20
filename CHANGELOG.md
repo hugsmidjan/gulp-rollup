@@ -3,12 +3,13 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- **BREAKING** feat: `options.plugins` is now a function
 
 ## 0.5.0 – 0.5.3
 
 _2020-05-04_
 
-- **BREAKING** feat: Stop exposing `plugins` on the factory object.
+- **BREAKING** feat: Stop exposing `plugins` on the factory object
 - feat: Support `outputOpts` array
 - fix: Warn about tsconfigs with `"extends"` field
 - fix: Always set `typescriptOpts.rootDir` when autofixing .d.ts files

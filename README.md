@@ -24,7 +24,7 @@ const options = {
   // entryPoints: null, // Advanced: rollup.input map - overrides the `glob` option
   //                    // Example:  { 'bar/outfile-sans-ext': 'foo/infile.ts' }
   NODE_ENV: process.env.NODE_ENV,
-  // plugins: [], // custom list of plugins
+  // plugins: (pluginsArr) => pluginsArr, // Supply your own plugin list
   // replaceOpts: {}, // custom options for @rollup/plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
   // aliasOpts: {}, // custom options for @rollup/plugin-alias
