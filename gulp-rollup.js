@@ -148,6 +148,8 @@ const getConfig = (opts) => {
             'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
             ...opts.replaceOpts,
           }),
+        ])
+        .concat([
           !!opts.minify &&
             require('rollup-plugin-terser').terser({
               output: { comments: 'some' },
