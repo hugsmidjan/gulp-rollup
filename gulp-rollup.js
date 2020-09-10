@@ -42,6 +42,7 @@ const defaultOpts = {
   // replaceOpts: {}, // custom options for @rollup/plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
   // aliasOpts: {}, // custom options for @rollup/plugin-alias
+  // namedExports: [], // list of CJS modules to expand. Useful for ['react', 'react-dom']
   // typescriptOpts: {
   //   rawDeclarations: false // true turns off auto-tidying
   //   // custom options for @rollup/plugin-typescript
@@ -72,6 +73,17 @@ const findTsConfig = (customTsConfig) => {
     }
     path = path.replace(/\/[^/]+?$/, '');
   }
+};
+
+const makeNamedExports = (names /*?: Array<string> */) => {
+  if (!names || !names.length) {
+    return undefined;
+  }
+  const namedExports = names.reduce((obj, name) => {
+    obj[name] = Object.keys(require(name));
+    return obj;
+  }, {});
+  return { namedExports };
 };
 
 const jsonc2json = (str) => str.replace(/\/\/.+?(\n|$)/g, '');
@@ -143,7 +155,7 @@ const getConfig = (opts) => {
             mainFields: ['main'],
             extensions: [/* '.mjs',  */ '.js', '.jsx', '.json', '.ts', '.tsx'],
           }),
-          require('@rollup/plugin-commonjs')(),
+          require('@rollup/plugin-commonjs')(makeNamedExports(opts.namedExports)),
           require('@rollup/plugin-replace')({
             'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
             ...opts.replaceOpts,

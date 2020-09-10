@@ -28,6 +28,7 @@ const options = {
   // replaceOpts: {}, // custom options for @rollup/plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
   // aliasOpts: {}, // custom options for @rollup/plugin-alias
+  // namedExports: [], // list of CJS modules to expand. Useful for ['react', 'react-dom']
   // typescriptOpts: {
   //   rawDeclarations: false // true turns off auto-tidying
   //   // custom options for @rollup/plugin-typescript

@@ -3,6 +3,8 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- feat: Add `namedExports` option, listing CJS modules to expand – Useful for
+  `['react', 'react-dom']`
 
 ## 0.6.0 – 0.6.1
 
