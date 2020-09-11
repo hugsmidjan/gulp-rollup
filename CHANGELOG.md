@@ -3,6 +3,8 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- **BREAKING** feat: Update dependencies `plugin-node-resolve` and
+  `plugin-commonjs`
 
 ## 0.6.2
 

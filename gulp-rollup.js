@@ -146,12 +146,12 @@ const getConfig = (opts) => {
       plugins: opts
         .plugins([
           !!opts.aliasOpts && require('@rollup/plugin-alias')(opts.aliasOpts),
-          require('rollup-plugin-preserve-shebangs').preserveShebangs(),
+          require('rollup-plugin-preserve-shebangs')(),
           require('@rollup/plugin-json')(),
           opts.typescriptOpts &&
             require('@rollup/plugin-typescript')(opts.typescriptOpts),
           require('@rollup/plugin-buble')({ exclude: '**/*.{ts,tsx}' }),
-          require('@rollup/plugin-node-resolve')({
+          require('@rollup/plugin-node-resolve').nodeResolve({
             mainFields: ['main'],
             extensions: [/* '.mjs',  */ '.js', '.jsx', '.json', '.ts', '.tsx'],
           }),
