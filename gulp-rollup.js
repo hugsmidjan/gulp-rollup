@@ -146,7 +146,7 @@ const getConfig = (opts) => {
       plugins: opts
         .plugins([
           !!opts.aliasOpts && require('@rollup/plugin-alias')(opts.aliasOpts),
-          require('rollup-plugin-preserve-shebangs')(),
+          require('rollup-plugin-preserve-shebangs').preserveShebangs(),
           require('@rollup/plugin-json')(),
           opts.typescriptOpts &&
             require('@rollup/plugin-typescript')(opts.typescriptOpts),
