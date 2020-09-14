@@ -4,6 +4,12 @@
 
 - ... <!-- Add new lines here. Version number will be decided later -->
 
+## 0.7.1
+
+_2020-09-14_
+
+- fix: Revert bad dependency number change
+
 ## 0.7.0
 
 _2020-09-10_
