@@ -4,6 +4,7 @@
 
 - ... <!-- Add new lines here. Version number will be decided later -->
 - feat: Silently drop `namedExports` option - not needed anymore
+- fix: pin `@rollup/plugin-typescript` version to fix watch bug
 
 ## 0.7.1
 
