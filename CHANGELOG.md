@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.8.0
+
+_2020-09-28_
+
 - **BREAKING** feat: Update dependency `plugin-typescript`
 
 ## 0.7.2
