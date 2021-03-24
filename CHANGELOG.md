@@ -4,6 +4,12 @@
 
 - ... <!-- Add new lines here. Version number will be decided later -->
 
+## 0.8.1
+
+_2021-03-24_
+
+- fix: set preventAssignment` to `true`
+
 ## 0.8.0
 
 _2020-09-28_
