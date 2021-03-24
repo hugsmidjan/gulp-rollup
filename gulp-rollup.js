@@ -146,6 +146,7 @@ const getConfig = (opts) => {
           require('@rollup/plugin-commonjs')(),
           require('@rollup/plugin-replace')({
             'process.env.NODE_ENV': JSON.stringify(opts.NODE_ENV),
+            preventAssignment: true,
             ...opts.replaceOpts,
           }),
         ])
