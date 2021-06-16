@@ -4,11 +4,13 @@
 
 - ... <!-- Add new lines here. Version number will be decided later -->
 
+- fix: Only replace `NODE_ENV` if `options.NODE_ENV` is a string
+
 ## 0.8.1
 
 _2021-03-24_
 
-- fix: set preventAssignment` to `true`
+- fix: set `preventAssignment` to `true`
 
 ## 0.8.0
 
