@@ -4,6 +4,10 @@
 
 - ... <!-- Add new lines here. Version number will be decided later -->
 
+## 0.8.2
+
+_2021-06-16_
+
 - fix: Only replace `NODE_ENV` if `options.NODE_ENV` is a string
 
 ## 0.8.1
