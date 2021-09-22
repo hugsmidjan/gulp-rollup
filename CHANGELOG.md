@@ -3,6 +3,7 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- fix: Set the default `options.NODE_ENV` to `""`
 
 ## 0.8.2
 

@@ -37,7 +37,7 @@ const defaultOpts = {
   glob: '*.{js,jsx,ts,tsx}', // which files to glob up as entry points
   // entryPoints: null, // Advanced: rollup.input map - overrides the `glob` option
   //                    // Example:  { 'bar/outfile-sans-ext': 'foo/infile.ts' }
-  NODE_ENV: process.env.NODE_ENV,
+  NODE_ENV: process.env.NODE_ENV || '',
   // plugins: (pluginsArray) => pluginsArray, // Supply your own plugin list
   // replaceOpts: {}, // custom options for @rollup/plugin-replace
   // terserOpts: {}, // custom options for rollup-plugin-terser
