@@ -47,7 +47,7 @@ const defaultOpts = {
   //   // custom options for @rollup/plugin-typescript
   // },
   minify: true,
-  sourcemaps: true,
+  sourcemaps: process.env.NODE_ENV !== 'production',
   format: 'iife', // Rollup output format
   codeSplit: true, // (when format isn't 'iife')
   // inputOpts: {},
