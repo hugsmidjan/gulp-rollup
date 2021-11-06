@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.8.4
+
+_2021-11-06_
+
 - fix: Disable sourcemaps (by default) when `NODE_ENV === "production"`
 
 ## 0.8.3
