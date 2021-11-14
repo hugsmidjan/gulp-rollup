@@ -3,6 +3,11 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+
+## 0.9.0
+
+_2021-11-14_
+
 - **BREAKING** feat: Update all plugin dependencies (may break some weird
   options)
 
