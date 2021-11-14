@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+    // "rootDir": "",
+    // "isolatedModules": false,
+    // "declarationDir": "test/pub",
+    // "declaration": true
+  },
+  "include": ["test/src/**/*.ts"]
+}

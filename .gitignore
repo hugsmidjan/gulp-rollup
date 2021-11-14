@@ -6,7 +6,4 @@ npm-debug.log
 
 # Ad-hoc local testing files
 .rpt2_cache
-gulpfile.js
-test
-tsconfig.json
-index.html
+test/pub
