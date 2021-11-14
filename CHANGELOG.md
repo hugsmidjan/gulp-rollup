@@ -3,6 +3,8 @@
 ## Upcoming...
 
 - ... <!-- Add new lines here. Version number will be decided later -->
+- **BREAKING** feat: Update all plugin dependencies (may break some weird
+  options)
 
 ## 0.8.4
 
