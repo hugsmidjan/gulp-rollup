@@ -1,3 +1,9 @@
+package-lock.json
+yarn.lock
+yarn-error.log
+npm-debug.log
+.rpt2_cache
+
 gulpfile.js
 test
 tsconfig.json
